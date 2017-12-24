@@ -1,0 +1,47 @@
+// -----------------------------------
+// Controlling an LED with the Google Home Mini
+// -----------------------------------
+
+// Variable declaration
+int led1 = D7;
+
+
+
+void setup()
+{
+
+   pinMode(led1, OUTPUT);;
+
+   // Particle.function will turn the LED on and off from the cloud.
+   Particle.function("led",ledToggle);
+
+
+   // Turn off both LEDs at the start
+   digitalWrite(led1, LOW);
+
+}
+
+
+void loop()
+{
+   // No action
+}
+
+
+
+int ledToggle(String command) {
+
+    // The inputs that will be provided by the Google Home are "on" and "off"
+    if (command=="on") {
+        digitalWrite(led1,HIGH);
+        return 1;
+    }
+    else if (command=="off") {
+        digitalWrite(led1,LOW);
+        return 0;
+    }
+    else {
+        return -1;
+    }
+}
+
